@@ -17,12 +17,10 @@
                 <h3 class="card-title"><b><?=$title?></b></h3>
                 <div class="col-lg-4  float-left">
                     <div class="btn-group w-100">
-                        <a class="btn btn-success col fileinput-button" href="{{url('add-order')}}">
+                        <a class="btn btn-success col fileinput-button" href="{{url('admin/orders/create')}}">
                             <i class="fas fa-plus"></i>
                             <span>إضافة طلب </span>
-
                         </a>
-
                     </div>
                 </div>
             </div>
