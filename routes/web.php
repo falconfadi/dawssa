@@ -34,6 +34,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
 
+    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class,'index']);
+    Route::post('orders/store', [\App\Http\Controllers\Admin\OrderController::class,'store']);
+    Route::get('orders/delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'destroy']);
+    Route::get('orders/edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit']);
+    Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
+
 });
 Route::group(['middleware' => ['auth:admin']], function() {
 
