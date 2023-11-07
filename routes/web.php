@@ -40,6 +40,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('orders/delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'destroy']);
     Route::get('orders/edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit']);
     Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
+    Route::get('orders/PrintOrder', [\App\Http\Controllers\Admin\OrderController::class,'PrintOrder']);
+    Route::get('clients', [\App\Http\Controllers\Admin\ClientController::class,'index']);
+    Route::get('clients/create', [\App\Http\Controllers\Admin\ClientController::class,'create']);
+    Route::post('clients/store', [\App\Http\Controllers\Admin\ClientController::class,'store']);
+
+
+    Route::get('services', [\App\Http\Controllers\Admin\ServiceController::class,'index']);
 
 });
 Route::group(['middleware' => ['auth:admin']], function() {
