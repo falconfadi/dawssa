@@ -42,7 +42,7 @@
                     ?>
                     <tr>
                         <td><?=$order['id']?></td>
-                        <td>   <?=$names[$i]?>                 </td>
+                        <td>   <?=$order->client->first_name?>                 </td>
                         <td><?=$order['created_at']?></td>
                         <td> <?=($order['is_regular']==0)?'نظامي':'مخالفات'?></td>
                         <td>

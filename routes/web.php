@@ -32,7 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin'], function () {
     Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
-    Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
+    //Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
 
     Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class,'index']);
     Route::get('orders/create', [\App\Http\Controllers\Admin\OrderController::class,'create']);
@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('orders/delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'destroy']);
     Route::get('orders/edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit']);
     Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
+    Route::get('/order-details/{id}', [\App\Http\Controllers\Admin\OrderController::class,'OrderDetails']);
+
 
 });
 Route::group(['middleware' => ['auth:admin']], function() {
