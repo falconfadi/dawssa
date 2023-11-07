@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/dawssa'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -69,7 +69,7 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
-
+    'charset' => 'utf8',
     'timezone' => 'UTC',
 
     /*
@@ -168,6 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -183,6 +185,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
+
     ])->toArray(),
 
 ];

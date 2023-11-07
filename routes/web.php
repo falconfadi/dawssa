@@ -32,7 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin'], function () {
     Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
-    //Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
+    Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
 
     Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class,'index']);
     Route::get('orders/create', [\App\Http\Controllers\Admin\OrderController::class,'create']);
@@ -42,6 +42,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
     Route::get('/order-details/{id}', [\App\Http\Controllers\Admin\OrderController::class,'OrderDetails']);
 
+    Route::get('orders/PrintOrder', [\App\Http\Controllers\Admin\OrderController::class,'PrintOrder']);
+    Route::get('clients', [\App\Http\Controllers\Admin\ClientController::class,'index']);
+    Route::get('clients/create', [\App\Http\Controllers\Admin\ClientController::class,'create']);
+    Route::post('clients/store', [\App\Http\Controllers\Admin\ClientController::class,'store']);
+
+
+    Route::get('services', [\App\Http\Controllers\Admin\ServiceController::class,'index']);
 
 });
 Route::group(['middleware' => ['auth:admin']], function() {
