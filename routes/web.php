@@ -27,11 +27,15 @@ Route::get('/admin/register',[RegisterController::class,'showAdminRegisterForm']
 Route::post('/admin/register',[RegisterController::class,'createAdmin'])->name('admin.register');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
+    Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
+
+});
 Route::group(['middleware' => ['auth:admin']], function() {
 
-    Route::group(['prefix' => 'admin'], function () {
-        Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
 
-    });
 });
