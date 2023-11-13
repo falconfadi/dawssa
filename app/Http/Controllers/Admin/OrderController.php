@@ -55,29 +55,6 @@ class OrderController extends Controller
     }
     public function PrintOrder()
     {
-/*
-        $data = [
-            'title' => 'إيصال جديد',
-            'receiptNumber' => '123456',
-            'customerName' => 'محمد محمد',
-            'phoneNumber' => '123-456-7890',
-            'propertyType' => 'نظامي',
-        ];
-        $options = new Options();
-        $options->set('defaultFont', 'Arial'); // Set a font that supports Arabic characters
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true);
-        $dompdf = new Dompdf($options);
-
-
-
-        $html = view('admin.pdf.document', $data)->render();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4');
-        $dompdf->render();
-        return $dompdf->stream('document.pdf');
-
-*/
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         $pdf->SetCreator('Your Name');
@@ -103,9 +80,15 @@ class OrderController extends Controller
 
         $file = 'file.html';
         $html = file_get_contents($file);
+        $html = str_replace('{title}', $data['title'], $html);
+        $html = str_replace('{receiptNumber}', $data['receiptNumber'], $html);
+        $html = str_replace('{customerName}', $data['customerName'], $html);
+        $html = str_replace('{phoneNumber}', $data['phoneNumber'], $html);
+        $html = str_replace('{propertyType}', $data['propertyType'], $html);
+
         $pdf->writeHTML($html, true, false, true, false, '',);
 
-        $pdf->Output('documento.pdf', 'I');
+        $pdf->Output('documento.pdf', 'D');
     }
     /**
      * Display the specified resource.
