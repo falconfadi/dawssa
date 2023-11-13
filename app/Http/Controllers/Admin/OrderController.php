@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Faq;
 use App\Models\Order;
 use App\Models\Service;
@@ -39,19 +40,42 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $serviceId = $request->input('service_id');
-        $service = Service::with('entries')->first();
-        var_dump($service->entries); exit();
-        $order = new Order();
+        $client = new Client();
+        $client->first_name = $request->input('first_name');
+        $client->last_name = $request->input('last_name');
+        $client->father_name = $request->input('father_name');
+        $client->national_id = $request->input('national_id');
+        $client->save();
 
+        $order = new Order();
+        $order->is_regular = $request->input('is_regular');
+        $order->service_id = $request->input('service_id');
+        $order->mobile = $request->input('phone');
+        $order->client_id = $client->id;
         if ($order->save()) {
             Session::flash('alert-success',__('message.new_faqs_added'));
-            return redirect('admin/faqs');
+            return redirect('admin/order-details/'.$order->id);
         } else {
-
             Session::flash('message',__('message.not_added'));
-            return redirect('admin/faqs');
+            return redirect('admin/order-details/'.$order->id);
         }
+    }
+
+    public function OrderDetails($id){
+        $title = 'تفاصيل الطلب';
+        $order = Order::find($id);
+        $service = Service::with('entries')->find($order->service_id);
+        //var_dump($service->entries);exit();
+        $formContent = '';
+        $entriesCont = new EntryController();
+        foreach($service->entries as $entry){
+
+            $entry = $entriesCont->entries[$entry->id];
+            $formContent .= $entriesCont->$entry();
+       //     echo $entry->id."-";exit();
+        }
+        return view('admin.orders.order_details',compact('formContent','title'));
+       // echo $id;
     }
     public function PrintOrder()
     {
