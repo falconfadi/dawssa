@@ -12,6 +12,6 @@ class ServiceController extends Controller
         $title ='الخدمات';
         //$local =  session()->get('locale');
         $services = Service::all();
-        return view('admin.$services.index',compact('title','services'));
+        return view('admin.services.index',compact('title','services'));
     }
 }

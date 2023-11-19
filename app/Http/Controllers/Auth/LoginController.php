@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -36,13 +37,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+        //$this->middleware('guest')->except('logout');
+        //$this->middleware('guest:admin')->except('logout');
     }
 
     public function showAdminLoginForm()
     {
+        //$r = Hash::make('123456');
+       // echo $r;
         return view('auth.login', ['url' => route('admin.login-view'), 'title'=>'Admin']);
+        ///echo "fd";
     }
 
     public function adminLogin(Request $request)
@@ -51,10 +55,9 @@ class LoginController extends Controller
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
-
+        //var_dump($request);exit();
         if (\Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
-            echo "ff";
-            //return redirect()->intended('/admin/home');
+            return redirect()->intended('/admin/home');
         }
 
         return back()->withInput($request->only('email', 'remember'));
