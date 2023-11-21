@@ -30,7 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
+    //Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
+    Route::get('logout', [LoginController::class, 'logoutAdmin'])->name('admin.logout');
     Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('services', [App\Http\Controllers\Admin\ServicesController::class, 'index']);
 
