@@ -50,6 +50,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::get('services', [\App\Http\Controllers\Admin\ServiceController::class,'index']);
+///    Route::get('orders/autocomplete', 'autocomplete')->name('autocomplete');
+    Route::get('orders/autocomplete',[\App\Http\Controllers\Admin\OrderController::class,'autocomplete']);
 
 });
 Route::group(['middleware' => ['auth:admin']], function() {

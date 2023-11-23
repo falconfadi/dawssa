@@ -90,5 +90,40 @@
 
             </div>
         </div>
+
+        <input class="typeahead form-control" id="search" name="search" type="text">
+        <select id="predictions"></select>
+        <input class="typeahead form-control" id="token" name="token" type="hidden" value="{{ csrf_token() }}">
+
     </section>
+    @push('ajax')
+        <script type="application/javascript">
+            $(document).ready(function() {
+                $('input[name="search"]').keyup(function() {
+
+                    var nationalId = $(this).val();
+                    var token = $("#token").val();
+                    $.ajax({
+                        url: '{{url("admin/orders/autocomplete")}}',
+                        type: 'get',
+                        data: { _token: token, national_id: nationalId },
+                        success: function(response) {
+                            var dropdown = $('#predictions');
+                            dropdown.empty();
+
+                            if (response.length > 0) {
+                                $.each(response, function(key, value) {
+                                    dropdown.append($('<option></option>').attr('value', value.id).text(value.first_name + ' ' + value.last_name));
+                                });
+                            } else {
+                                dropdown.append($('<option disabled selected>No predictions found</option>'));
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
+
+
 @endsection

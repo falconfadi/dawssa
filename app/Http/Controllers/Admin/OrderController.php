@@ -21,7 +21,16 @@ class OrderController extends Controller
     {
         parent::__construct();
     }
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('national_id');
 
+        $data = Client::where('national_id', 'LIKE',   "%{$search}%")
+            ->get();
+
+
+        return response()->json($data);
+    }
     public function index()
     {
         $title ='الطلبات';
