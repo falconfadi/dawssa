@@ -24,11 +24,11 @@ class OrderController extends Controller
     public function autocomplete(Request $request)
     {
         $search = $request->get('national_id');
+        $data = array();
+        if (strlen($search)>0){
+            $data = Client::where('national_id', 'LIKE',   "%{$search}%")->get();
 
-        $data = Client::where('national_id', 'LIKE',   "%{$search}%")
-            ->get();
-
-
+        }
         return response()->json($data);
     }
     public function index()

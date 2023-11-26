@@ -50,6 +50,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::get('services', [\App\Http\Controllers\Admin\ServiceController::class,'index']);
+    Route::get('services/create', [\App\Http\Controllers\Admin\ServiceController::class,'create']);
+    Route::post('services/store', [\App\Http\Controllers\Admin\ServiceController::class,'store']);
 ///    Route::get('orders/autocomplete', 'autocomplete')->name('autocomplete');
     Route::get('orders/autocomplete',[\App\Http\Controllers\Admin\OrderController::class,'autocomplete']);
 

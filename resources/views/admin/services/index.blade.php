@@ -19,7 +19,7 @@
                     <div class="btn-group w-100">
                         <a class="btn btn-success col fileinput-button" href="{{url('admin/services/create')}}">
                             <i class="fas fa-plus"></i>
-                            <span>إضافة مشترك </span>
+                            <span>إضافة خدمة </span>
                         </a>
                     </div>
                 </div>
@@ -31,25 +31,16 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>اسم المشترك </th>
-                        <th>الكنية</th>
-                        <th>اسم الأب</th>
-                        <th>الرقم الوطني</th>
+                        <th>الاسم  </th>
                         <th>تحكم</th>
-
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i=0; foreach ($services as $service){
-                    ?>
+                    @php $i=0; @endphp
+                    @foreach ($services as $service)
                     <tr>
-                        <td><?=$service['id']?></td>
-                        <td><?=$service['first_name']?></td>
-                        <td><?=$service['last_name']?></td>
-                        <td><?=$service['father_name']?></td>
-
-                        <td><?=$service['national_id']?></td>
-
+                        <td>{{$i}}</td>
+                        <td>{{$service->name}}</td>
 
                         <td>
 
@@ -58,19 +49,10 @@
 
                         </td>
                     </tr>
-                    <?php $i++; }?>
-
+                    @php  $i++; @endphp
+                    @endforeach
 
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
             <!-- /.card-body -->

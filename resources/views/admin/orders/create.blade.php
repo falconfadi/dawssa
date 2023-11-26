@@ -19,20 +19,33 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">الاسم</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="first_name">
+                                            <label for="first_name">الاسم</label>
+                                            <input type="text" class="form-control" id="first_name" placeholder=" " name="first_name" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">اسم الأب</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="father_name">
+                                            <label for="father_name">اسم الأب</label>
+                                            <input type="text" class="form-control" id="father_name" placeholder=" " name="father_name" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">الكنية</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" "  name="last_name">
+                                            <label for="last_name">الكنية</label>
+                                            <input type="text" class="form-control" id="last_name" placeholder=" "  name="last_name" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="national_id">ابحث بحسب الرقم الوطني</label>
+                                            <input class="typeahead form-control" id="search" name="search" type="text">
+    {{--                                        <select id="predictions" ></select>--}}
+                                            <input class="typeahead form-control" id="token" name="token" type="hidden" value="{{ csrf_token() }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="padding-top: 35px" >
+                                        <div class="form-group" style="display: none" id="add_link">
+                                            <a href="{{url('admin/clients/create')}}">إضافة مشترك جديد</a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -41,12 +54,7 @@
                                             <input type="text" class="form-control" id="phone" name="phone" placeholder=" " name="phone">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="national_id">الرقم الوطني</label>
-                                            <input type="text" class="form-control" id="national_id" placeholder=" " name="national_id">
-                                        </div>
-                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>نظامي\مخالفات</label>
@@ -91,9 +99,7 @@
             </div>
         </div>
 
-        <input class="typeahead form-control" id="search" name="search" type="text">
-        <select id="predictions"></select>
-        <input class="typeahead form-control" id="token" name="token" type="hidden" value="{{ csrf_token() }}">
+
 
     </section>
     @push('ajax')
@@ -113,10 +119,19 @@
 
                             if (response.length > 0) {
                                 $.each(response, function(key, value) {
-                                    dropdown.append($('<option></option>').attr('value', value.id).text(value.first_name + ' ' + value.last_name));
+                                   // dropdown.append($('<option></option>').attr('value', value.id).text(value.first_name + ' ' + value.last_name));
+                                    $("#add_link").hide();
+                                    $("#first_name").val(value.first_name);
+                                    $("#father_name").val(value.father_name);
+                                    $("#last_name").val(value.last_name);
                                 });
+
                             } else {
-                                dropdown.append($('<option disabled selected>No predictions found</option>'));
+                                $("#add_link").show();
+                                $("#first_name").val('');
+                                $("#father_name").val('');
+                                $("#last_name").val('');
+                                //dropdown.append($('<option disabled selected>No predictions found</option>'));
                             }
                         }
                     });
