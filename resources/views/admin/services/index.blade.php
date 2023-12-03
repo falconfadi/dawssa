@@ -41,12 +41,9 @@
                     <tr>
                         <td>{{$i}}</td>
                         <td>{{$service->name}}</td>
-
                         <td>
-
                             <a class="dropdown-item" href="#"><span class="badge bg-warning">تعديل</span></a>
                             <a class="dropdown-item" href="#"><span class="badge bg-primary">تأكيد</span></a>
-
                         </td>
                     </tr>
                     @php  $i++; @endphp

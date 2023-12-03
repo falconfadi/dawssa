@@ -55,6 +55,21 @@ Route::group(['prefix' => 'admin'], function () {
 ///    Route::get('orders/autocomplete', 'autocomplete')->name('autocomplete');
     Route::get('orders/autocomplete',[\App\Http\Controllers\Admin\OrderController::class,'autocomplete']);
 
+
+    Route::get('roles',[\App\Http\Controllers\Admin\RoleController::class,'index']);
+    Route::get('roles/create',[\App\Http\Controllers\Admin\RoleController::class,'create']);
+    Route::post('roles/store', [\App\Http\Controllers\Admin\RoleController::class, 'store']);
+    Route::get('roles/edit/{id}',[\App\Http\Controllers\Admin\RoleController::class,'edit']);
+    Route::post('roles/update', [\App\Http\Controllers\Admin\RoleController::class, 'update']);
+    Route::get('roles/delete/{id}', [\App\Http\Controllers\Admin\RoleController::class,'destroy']);
+
+    Route::get('users_panel',[\App\Http\Controllers\Admin\RoleController::class,'users_panel']);
+    Route::get('users_panel/create',[\App\Http\Controllers\Admin\RoleController::class,'create_users_panel']);
+    Route::post('users_panel/store', [\App\Http\Controllers\Admin\RoleController::class, 'store_users_panel']);
+    Route::get('users_panel/edit/{id}',[\App\Http\Controllers\Admin\RoleController::class,'edit_users_panel']);
+    Route::post('users_panel/update', [\App\Http\Controllers\Admin\RoleController::class, 'update_users_panel']);
+    Route::get('users_panel/delete/{id}',[\App\Http\Controllers\Admin\RoleController::class,'destroy_users_panel']);
+
 });
 Route::group(['middleware' => ['auth:admin']], function() {
 
