@@ -49,7 +49,7 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu">
-                                        <a type="button" class="btn-sm" href="#">تعديل</a>
+                                        <a type="button" class="btn-sm" href="{{url('admin/roles/edit/'.$role->id)}}">تعديل</a>
                                         <div class="dropdown-divider"></div>
                                         <a type="button" class="btn-sm" href="#">حذف</a>
                                     </div>

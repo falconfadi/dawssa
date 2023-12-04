@@ -63,12 +63,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('roles/update', [\App\Http\Controllers\Admin\RoleController::class, 'update']);
     Route::get('roles/delete/{id}', [\App\Http\Controllers\Admin\RoleController::class,'destroy']);
 
-    Route::get('users_panel',[\App\Http\Controllers\Admin\UserPanelController::class,'users_panel']);
+    Route::get('users_panel',[\App\Http\Controllers\Admin\UserPanelController::class,'index']);
     Route::get('users_panel/create',[\App\Http\Controllers\Admin\UserPanelController::class,'create_users_panel']);
-    Route::post('users_panel/store', [\App\Http\Controllers\Admin\RoleController::class, 'store_users_panel']);
-    Route::get('users_panel/edit/{id}',[\App\Http\Controllers\Admin\RoleController::class,'edit_users_panel']);
-    Route::post('users_panel/update', [\App\Http\Controllers\Admin\RoleController::class, 'update_users_panel']);
-    Route::get('users_panel/delete/{id}',[\App\Http\Controllers\Admin\RoleController::class,'destroy_users_panel']);
+    Route::post('users_panel/store', [\App\Http\Controllers\Admin\UserPanelController::class, 'store']);
+    Route::get('users_panel/edit/{id}',[\App\Http\Controllers\Admin\UserPanelController::class,'edit_users_panel']);
+    Route::post('users_panel/update', [\App\Http\Controllers\Admin\UserPanelController::class, 'update_users_panel']);
+    Route::get('users_panel/delete/{id}',[\App\Http\Controllers\Admin\UserPanelController::class,'destroy_users_panel']);
 
 });
 Route::group(['middleware' => ['auth:admin']], function() {

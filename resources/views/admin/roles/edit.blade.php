@@ -13,20 +13,20 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/roles/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/roles/update')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">الاسم</label>
-                                            <input type="text" class="form-control" id="name" placeholder=" " name="name">
+                                            <input type="text" class="form-control" id="name" value="{{$role->name}} " name="name">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name_ar">الاسم (عربي)</label>
-                                            <input type="text" class="form-control" id="name_ar" placeholder=" " name="name_ar">
+                                            <input type="text" class="form-control" id="name_ar" value="{{$role->name_ar}} " name="name_ar">
                                         </div>
                                     </div>
 
@@ -41,7 +41,10 @@
                                         <!-- checkbox -->
                                         <div class="form-group clearfix">
                                             <div class=" d-inline">
-                                                <input type="checkbox" id="{{$perms[$i]->id}}" name="permissions[]" value="{{$perms[$i]->name}}">
+                                                <input type="checkbox" id="{{$perms[$i]->id}}" name="permissions[]" value="{{$perms[$i]->name}}"
+
+                                                    {{ (in_array($perms[$i]->id,$rolePermissionsIds)) ? "checked" : "" }}
+                                                >
                                                 <label for="checkboxPrimary{{$i}}">
                                                    {{$perms[$i]->name_ar}}
                                                 </label>

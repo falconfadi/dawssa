@@ -239,7 +239,7 @@
 <script src="{{ asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/adminlte.js')}}"></script>
-
+@stack('select2')
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('admin/dist/js/lookup.js')}}"></script>

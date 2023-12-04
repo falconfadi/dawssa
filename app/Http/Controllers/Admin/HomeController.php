@@ -34,8 +34,8 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $title = __('auth.Administration_Dashboard');
-        $local =  session()->get('locale');
+        $title = "الرئيسية";
+        //$local =  session()->get('locale');
 
 //        $setting = $this->setting;
 //        $appTitle = ($local=='ar')?$setting->title_ar:$setting->title;

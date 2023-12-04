@@ -81,24 +81,24 @@ class RoleController extends Controller
     {
         //1 add ,2 edit ,3 delete, 4 view, 5 print, 6 freeze, 7 change password , 8 final delete , 9 add note, 10 verify, 11 send (notification , sms), 12 renew balance
         $title = "تعديل الدور";
-        $role = Role::findById($id);
+        $role = Role::where('guard_name','admin')->where('id',$id)->first();
         $perms = Permission::where('guard_name','admin')->get();
 
         $rolePermissionsIds = $role->permissions->pluck('id')->toArray();
         //var_dump($rolePermissionsIds);exit();
-        $groups = Permission::where('guard_name','admin')->where('main_group',1)->get();
-        $permissionsTable = array();
-        $types = $this->types;
-        foreach($perms as $permission)
-        {
-            for($i=1;$i<=count($types);$i++){
-                if($permission->type==$i ){
-                    $permissionsTable[$permission->group_id][$i] = $permission;
-                }
-            }
-        }
+//        $groups = Permission::where('guard_name','admin')->where('main_group',1)->get();
+//        $permissionsTable = array();
+//        $types = $this->types;
+//        foreach($perms as $permission)
+//        {
+//            for($i=1;$i<=count($types);$i++){
+//                if($permission->type==$i ){
+//                    $permissionsTable[$permission->group_id][$i] = $permission;
+//                }
+//            }
+//        }
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        return view('admin.roles.edit1',compact('title','role','perms','rolePermissionsIds','groups','permissionsTable','types'));
+        return view('admin.roles.edit',compact('title','role','perms','rolePermissionsIds'/*,'groups','permissionsTable','types'*/));
     }
 
     /**
@@ -139,105 +139,6 @@ class RoleController extends Controller
 
 
 
-
-
-    public function store_users_panel(Request $request){
-        $messages = [
-            'email.unique' =>  'الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقاً',
-            'name.string' => 'الاسم يجب أن يكون سلسلة محارف '
-        ];
-        $validator = Validator::make($request->all(), [
-            'phone' =>'required|unique:admins',
-            'name' => 'required',
-            'email' => 'required|string|email|max:255|unique:admins',
-            'password' => ['required'],
-        ],$messages);
-
-        if ($validator->fails())
-        {
-            //var_dump($validator->errors());
-            Session::flash('alert-danger',$validator->errors());
-            return redirect('admin/users_panel/create');
-        }
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        $user = Admin::create(array(
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password'=>Hash::make($request->password),
-            'gender' => 1
-        ));
-
-        $role_id = $request->role;
-        $role = Role::find($role_id);
-        $user->assignRole($role);
-
-        Session::flash('alert-success','تم إضافة مستخدم جديد مع دوره');
-        return redirect('admin/users_panel');
-    }
-
-    public function edit_users_panel($id){
-        $title = __('label.edit_user_panel');
-        $user  = Admin::find($id);
-        //$role  = $user->getRoleNames();
-       // var_dump($role);exit();
-        //if($role)
-            //$rolee = Admin::role($role[0])->get();
-        $roleId = $user->roles->first()->id;
-        $perms = Permission::where('guard_name','admin')->get();
-        $roles = Role::all();
-        return view('admin.users_panel.edit',compact('title','perms','roles','user','roleId'));
-    }
-
-    public function update_users_panel(Request $request){
-        $user = Admin::find($request->id);
-        $messages = [
-            'email.unique' =>  'الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقاً',
-            'name.string' => 'الاسم يجب أن يكون سلسلة محارف '
-        ];
-        //الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقا
-        $validator = Validator::make($request->all(), [
-            'phone' =>'required',
-            'name' => 'required|string',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('admins')->ignore($user->id)]
-           /* 'password' => ['required'],*/
-        ],$messages);
-
-        if ($validator->fails())
-        {
-            return redirect('admin/users_panel/edit/'.$user->id)->withErrors($validator);
-        }
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        //$password = ($request->password))
-        $user ->update(array(
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            /*'password'=>$password,*/
-            'gender' => 1
-        ));
-
-        $user->roles()->detach();
-        $role_id = $request->role;
-        $role = Role::find($role_id);
-        $user->assignRole($role);
-
-        Session::flash('alert-success','تم تعديل مستخدم جديد مع دوره');
-        return redirect('admin/users_panel');
-    }
-
-    public function destroy_users_panel($id)
-    {
-
-        $user = Admin::find($id);
-        $user->roles()->detach();
-        $res = $user->delete();
-        //return back()->with('success','User deleted successfully');
-        return redirect('admin/users_panel');
-    }
 
     public  function test(){
         // Reset cached roles and permissions
