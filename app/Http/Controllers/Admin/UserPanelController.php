@@ -18,7 +18,8 @@ class UserPanelController extends Controller
     public function index()
     {
         $title = "مستخدمي لوحة التحكم";
-        $users = Admin::all();
+        $users = Admin::with('roles')->get();
+
         return view('admin.users_panel.index',compact('title','users'));
     }
 
@@ -66,16 +67,20 @@ class UserPanelController extends Controller
     }
 
     public function edit_users_panel($id){
-        $title = __('label.edit_user_panel');
+        $title ='تعديل مستخدم لوحة التحكم';
         $user  = Admin::find($id);
         //$role  = $user->getRoleNames();
         // var_dump($role);exit();
         //if($role)
         //$rolee = Admin::role($role[0])->get();
-        $roleId = $user->roles->first()->id;
+        $userRolesIds = array();
+        foreach($user->roles as $userRole){
+            $userRolesIds[] = $userRole->id;
+        }
+        //$roleId = $user->roles->first()->id;
         $perms = Permission::where('guard_name','admin')->get();
         $roles = Role::all();
-        return view('admin.users_panel.edit',compact('title','perms','roles','user','roleId'));
+        return view('admin.users_panel.edit',compact('title','perms','roles','user','userRolesIds'));
     }
 
     public function update_users_panel(Request $request){

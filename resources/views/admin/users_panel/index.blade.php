@@ -19,7 +19,7 @@
                     <div class="btn-group w-100">
                         <a class="btn btn-success col fileinput-button" href="{{url('admin/users_panel/create')}}">
                             <i class="fas fa-plus"></i>
-                            <span>إضافة خدمة </span>
+                            <span>إضافة مستخدم لوحة تحكم  </span>
                         </a>
                     </div>
                 </div>
@@ -31,19 +31,37 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>الاسم  </th>
+                        <th>البريد الإلكتروني  </th>
                         <th>الهاتف</th>
+                        <th>الأدوار</th>
+                        <th>التحكم</th>
+
                     </tr>
                     </thead>
                     <tbody>
                     @php $i=0; @endphp
                     @foreach ($users as $user)
                     <tr>
-                        <td>{{$i}}</td>
-                        <td>{{$user->name}}</td>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->phone}}</td>
                         <td>
-                            <a class="dropdown-item" href="#"><span class="badge bg-warning">تعديل</span></a>
-                            <a class="dropdown-item" href="#"><span class="badge bg-primary">تأكيد</span></a>
+                        @foreach ($user->roles as $role)
+                       {!!  $role->name .'<br>'!!}
+                        @endforeach
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"></button>
+                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a type="button" class="btn-sm" href="{{url('admin/users_panel/edit/'.$user->id)}}">تعديل</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="#">حذف</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     @php  $i++; @endphp

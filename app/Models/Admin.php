@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
+
     use HasFactory;use HasRoles;
     protected $guard = "admin";
 
@@ -24,4 +25,5 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
 }
