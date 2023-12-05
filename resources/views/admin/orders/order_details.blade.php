@@ -13,7 +13,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/orders/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/order-details-store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <!-- /.card-body -->
-
+                            <input value="{{$id}}" type="hidden" name="id">
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">إدخال</button>
                             </div>

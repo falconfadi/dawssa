@@ -41,11 +41,12 @@
                                             <input class="typeahead form-control" id="search" name="search" type="text">
     {{--                                        <select id="predictions" ></select>--}}
                                             <input class="typeahead form-control" id="token" name="token" type="hidden" value="{{ csrf_token() }}">
+                                            <input type="hidden" id="client_id" name="client_id" >
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="padding-top: 35px" >
                                         <div class="form-group" style="display: none" id="add_link">
-                                            <a href="{{url('admin/clients/create')}}">إضافة مشترك جديد</a>
+                                            <a href="{{url('admin/clients/create')}}"  target="__blank">إضافة مشترك جديد</a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -84,7 +85,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -98,43 +98,43 @@
 
             </div>
         </div>
-
-
-
     </section>
     @push('ajax')
         <script type="application/javascript">
             $(document).ready(function() {
                 $('input[name="search"]').keyup(function() {
+                    if($("#search").val().length>=11){
+                        //console.log($(this).length);
+                        var nationalId = $(this).val();
+                        var token = $("#token").val();
+                        $.ajax({
+                            url: '{{url("admin/orders/autocomplete")}}',
+                            type: 'get',
+                            data: { _token: token, national_id: nationalId },
+                            success: function(response) {
+                                var dropdown = $('#predictions');
+                                dropdown.empty();
 
-                    var nationalId = $(this).val();
-                    var token = $("#token").val();
-                    $.ajax({
-                        url: '{{url("admin/orders/autocomplete")}}',
-                        type: 'get',
-                        data: { _token: token, national_id: nationalId },
-                        success: function(response) {
-                            var dropdown = $('#predictions');
-                            dropdown.empty();
+                                if (response.length > 0) {
+                                    $.each(response, function(key, value) {
+                                        // dropdown.append($('<option></option>').attr('value', value.id).text(value.first_name + ' ' + value.last_name));
+                                        $("#add_link").hide();
+                                        $("#first_name").val(value.first_name);
+                                        $("#father_name").val(value.father_name);
+                                        $("#last_name").val(value.last_name);
+                                        $("#client_id").val(value.id);
+                                    });
 
-                            if (response.length > 0) {
-                                $.each(response, function(key, value) {
-                                   // dropdown.append($('<option></option>').attr('value', value.id).text(value.first_name + ' ' + value.last_name));
-                                    $("#add_link").hide();
-                                    $("#first_name").val(value.first_name);
-                                    $("#father_name").val(value.father_name);
-                                    $("#last_name").val(value.last_name);
-                                });
-
-                            } else {
-                                $("#add_link").show();
-                                $("#first_name").val('');
-                                $("#father_name").val('');
-                                $("#last_name").val('');
-                                //dropdown.append($('<option disabled selected>No predictions found</option>'));
+                                } else {
+                                    $("#add_link").show();
+                                    $("#first_name").val('');
+                                    $("#father_name").val('');
+                                    $("#last_name").val('');
+                                    //dropdown.append($('<option disabled selected>No predictions found</option>'));
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 });
             });
         </script>

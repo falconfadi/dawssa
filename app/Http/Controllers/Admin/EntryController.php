@@ -18,8 +18,8 @@ class EntryController extends Controller
                             <div class="form-group">
                                 <label for="customFile">سند ملكية</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <input type="file" class="custom-file-input" id="i1" name="i1">
+                                    <label class="custom-file-label" for="i1">Choose file</label>
                                 </div>
                             </div>
                          </div>';
@@ -31,8 +31,8 @@ class EntryController extends Controller
                             <div class="form-group">
                                 <label for="customFile">فاتورة مياه لمشترك قريب </label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <input type="file" class="custom-file-input" id="i2" name="i2">
+                                    <label class="custom-file-label" for="i2">Choose file</label>
                                 </div>
                             </div>
                          </div>';
@@ -44,8 +44,8 @@ class EntryController extends Controller
                             <div class="form-group">
                                 <label for="customFile">ورقة نقل ملكية</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <input type="file" class="custom-file-input" id="i3" name="i3">
+                                    <label class="custom-file-label" for="i3">Choose file</label>
                                 </div>
                             </div>
                          </div>';

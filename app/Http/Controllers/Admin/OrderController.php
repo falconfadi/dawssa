@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Faq;
 use App\Models\Order;
+use App\Models\OrderEntry;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -49,18 +50,18 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $client = new Client();
-        $client->first_name = $request->input('first_name');
-        $client->last_name = $request->input('last_name');
-        $client->father_name = $request->input('father_name');
-        $client->national_id = $request->input('national_id');
-        $client->save();
+//        $client = new Client();
+//        $client->first_name = $request->input('first_name');
+//        $client->last_name = $request->input('last_name');
+//        $client->father_name = $request->input('father_name');
+//        $client->national_id = $request->input('national_id');
+//        $client->save();
 
         $order = new Order();
         $order->is_regular = $request->input('is_regular');
         $order->service_id = $request->input('service_id');
         $order->mobile = $request->input('phone');
-        $order->client_id = $client->id;
+        $order->client_id = $request->input('client_id');//$client->id;
         if ($order->save()) {
             Session::flash('alert-success',__('message.new_faqs_added'));
             return redirect('admin/order-details/'.$order->id);
@@ -76,16 +77,38 @@ class OrderController extends Controller
         $service = Service::with('entries')->find($order->service_id);
         //var_dump($service->entries);exit();
         $formContent = '';
-        $entriesCont = new EntryController();
+        $entriesContr = new EntryController();
         foreach($service->entries as $entry){
 
-            $entry = $entriesCont->entries[$entry->id];
-            $formContent .= $entriesCont->$entry();
+            $entryStr = $entriesContr->entries[$entry->id];
+            $formContent .= $entriesContr->$entryStr();
        //     echo $entry->id."-";exit();
         }
-        return view('admin.orders.order_details',compact('formContent','title'));
+        return view('admin.orders.order_details',compact('formContent','title','id'));
        // echo $id;
     }
+
+    public function OrderDetailsStore(Request $request){
+        $orderId = $request->id;
+      //  echo $id;echo "<br>";
+        $entryValues = $request->except('_method', '_token','id');
+        foreach ($entryValues as $key=>$entryValue){
+            $orderEntry = new OrderEntry();
+            $orderEntry->order_id = $orderId;
+            $orderEntry->entry_id = substr($key, 1); //$orderId;
+
+            $file = $request->file($key);
+            $file_name = 'entries/' . md5(uniqid() . time()) . '.' . $file->getClientOriginalExtension();
+            if ($file->move('storage/sliders/', $file_name)) {
+                $orderEntry->value = $file_name;
+            }
+            $orderEntry->save();
+        }
+        Session::flash('alert-success',"تم إضافة طلب جديد");
+        return redirect('admin/orders/');
+
+    }
+
     public function PrintOrder()
     {
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
