@@ -89,17 +89,16 @@ class UserPanelController extends Controller
             'email.unique' =>  'الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقاً',
             'name.string' => 'الاسم يجب أن يكون سلسلة محارف '
         ];
-        //الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقا
-        $validator = Validator::make($request->all(), [
-            'phone' =>'required',
-            'name' => 'required|string',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('admins')->ignore($user->id)]
-            /* 'password' => ['required'],*/
-        ],$messages);
+            $validator = Validator::make($request->all(), [
+                'phone' =>'required',
+                'name' => 'required|string',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('admins')->ignore($user->id)]
 
+            ],$messages);
+        //الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقا
         if ($validator->fails())
         {
             return redirect('admin/users_panel/edit/'.$user->id)->withErrors($validator);
@@ -107,7 +106,7 @@ class UserPanelController extends Controller
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         //$password = ($request->password))
         $user ->update(array(
-            'name' => $request->name,
+
             'email' => $request->email,
             'phone' => $request->phone,
             /*'password'=>$password,*/
@@ -115,10 +114,15 @@ class UserPanelController extends Controller
         ));
 
         $user->roles()->detach();
+        foreach($request->roles as $role){
+            $role = Role::find($role);
+            $user->assignRole($role);
+        }
+        /*
         $role_id = $request->role;
         $role = Role::find($role_id);
         $user->assignRole($role);
-
+*/
         Session::flash('alert-success','تم تعديل مستخدم جديد مع دوره');
         return redirect('admin/users_panel');
     }

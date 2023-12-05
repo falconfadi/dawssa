@@ -1,5 +1,10 @@
 @extends('layouts/admin')
 @section('content')
+    <style>
+        .font-white{
+            color:#fff !important;
+        }
+    </style>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -8,6 +13,27 @@
 
                     <!-- general form elements -->
                     <div class="card card-primary">
+                        @if(Session::has('alert-danger'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <div class="alert-body">
+                                    {{session('alert-danger')}}
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <div class="alert-body">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li class="text-danger font-white">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h3 class="card-title">{{$title}}</h3>
                         </div>

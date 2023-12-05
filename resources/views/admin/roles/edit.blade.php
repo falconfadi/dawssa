@@ -17,6 +17,10 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="form-group">
+
+                                        <input hidden type="text" class="form-control" id="id" value="{{$role->id}} " name="id">
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">الاسم</label>

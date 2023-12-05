@@ -47,10 +47,14 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/users_panel/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/users_panel/update')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
+                                        <div class="form-group">
+
+                                            <input hidden type="text" class="form-control" id="id" placeholder=" " name="id" value="{{$user->id}}">
+                                        </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">الاسم</label>

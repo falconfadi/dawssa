@@ -110,9 +110,9 @@ class RoleController extends Controller
      */
     public function update(Request $request)
     {
-        //var_dump($request->id);exit();
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        $role = Role::findById($request->id);
+     //   var_dump($request->id);exit();
+      //  app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        $role = Role::findById($request->id,'admin');
         $role->name = $request->name;
         $role->save();
         $permissions = $request->permissions;
@@ -122,7 +122,7 @@ class RoleController extends Controller
            $role->givePermissionTo($permissions[$i]);
         }
         //return redirect('admin/roles');
-        Session::flash('alert-success',__('message.Role_Edited'));
+        Session::flash('alert-success','تم تعديل الدور بنجاح');
         return redirect('admin/roles');
 
     }
