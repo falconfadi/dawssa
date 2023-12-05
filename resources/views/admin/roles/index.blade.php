@@ -37,7 +37,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @php $i=0; @endphp
+                    @php $i=1; @endphp
                     @foreach($roles as $role)
                         <tr>
                             <td>{{$i}}</td>
@@ -56,8 +56,9 @@
                                 </div>
                             </td>
                         </tr>
+                        @php $i++; @endphp
                     @endforeach
-                    @php $i++; @endphp
+
                     </tbody>
                     <tfoot>
                     <tr>

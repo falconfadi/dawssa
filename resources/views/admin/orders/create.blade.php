@@ -6,14 +6,24 @@
 
                 <div class="col-md-12">
 
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none" id="errormsgdiv">
+                        <div class="alert-body">
+
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">{{$title}}</h3>
                         </div>
+
+
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/orders/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/orders/store')}}" enctype="multipart/form-data" onsubmit="return checkValidations()">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -76,15 +86,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="customFile">تحميل صورة الهوية</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -142,3 +144,34 @@
 
 
 @endsection
+@push('form_validation')
+    <script type="text/javascript">
+        function checkValidations()
+        {
+            //alert(document.getElementById('starttime').value);
+            var x = true;
+             first_name = document.getElementById('first_name').value;
+            // start_time = document.getElementById('start_time').value;
+            //
+            // errormsgdiv = document.getElementById('errormsgdiv');
+            // errormsgdiv.innerHTML = "";
+
+            if( first_name== '' /*|| title_en == '*/)
+            {
+                errormsgdiv.style.display = "block";
+                errormsgdiv.innerHTML='<div class="alert-body"> حقل الاسم مطلوب </div>';
+                x = false;
+            }
+            // givenDate = new Date(end_time).setHours(0,0,0,0);
+            // var todaysDate = new Date().setHours(0, 0, 0, 0);
+            //
+            // if (givenDate < todaysDate) {
+            //     errormsgdiv.style.display = "block";
+            //     errormsgdiv.innerHTML='<div class="alert-body">تاريخ النهاية يجب أن يكون في المستقبل  </div>';
+            //     x = false;
+            //
+            // }
+            return x;
+        }
+    </script>
+@endpush

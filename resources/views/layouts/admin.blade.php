@@ -244,5 +244,6 @@
 <script src="{{ asset('admin/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('admin/dist/js/lookup.js')}}"></script>
 @stack('ajax')
+@stack('form_validation')
 </body>
 </html>
