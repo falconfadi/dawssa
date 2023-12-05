@@ -2,3 +2,6 @@
 .sidebar-menu li .label, .sidebar-menu li .badge {
 	margin-top: -15px !important;
 }
+.small-font{
+    font-size: 12px;
+}
