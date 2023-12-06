@@ -42,8 +42,16 @@
                         <td>{{$i}}</td>
                         <td>{{$service->name}}</td>
                         <td>
-                            <a class="dropdown-item" href="#"><span class="badge bg-warning">تعديل</span></a>
-                            <a class="dropdown-item" href="#"><span class="badge bg-primary">تأكيد</span></a>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"></button>
+                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a type="button" class="btn-sm" href="#">تعديل</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="#">حذف</a>
+
                         </td>
                     </tr>
                     @php  $i++; @endphp
