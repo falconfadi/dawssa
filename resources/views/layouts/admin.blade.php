@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('admin/dist/css/bootstrap-rtl.min.css')}}">
     <link rel="stylesheet" href="{{ asset('admin/dist/css/rtl.css')}}">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -111,6 +112,8 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
+
+
                     <li class="nav-item">
                         <a href="{{url('admin/orders')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -119,6 +122,7 @@
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{url('admin/clients')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>

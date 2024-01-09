@@ -37,7 +37,7 @@ class ClientController extends Controller
             'father_name' => $request->father_name ,'national_id' => $request->national_id]);
 */
         $messages = [
-            'national_id.unique' =>  'الرجاء التأكد من عدم تسجيل بريد الكتروني مسجل مسبقاً',
+            'national_id.unique' =>  'الرجاء التأكد من عدم تسجيل رقم وطني مسجل مسبقاً',
             'first_name.string' => 'الاسم يجب أن يكون سلسلة محارف ',
             'last_name.string' => 'الكنية يجب أن تكون سلسلة محارف ',
             'father_name.string' => 'اسم الأب يجب أن يكون سلسلة محارف ',
@@ -63,14 +63,15 @@ class ClientController extends Controller
         if ($validator->fails())
         {
 
-            var_dump($validator->fails());
-            var_dump($messages);
+           // var_dump($validator->fails());
+           // var_dump($messages);
            return redirect('admin/clients/create')->withErrors($validator);
-        }/*
+        }
         $client = new Client();
         $client->first_name = $request->input('first_name');
         $client->last_name = $request->input('last_name');
         $client->father_name = $request->input('father_name');
+       // $client->father_name = $request->input('father_name');
         $client->national_id = $request->input('national_id');
 
         if ($client->save()) {
@@ -79,7 +80,7 @@ class ClientController extends Controller
         } else {
 
             Session::flash('message','لم تتم إضافة المشترك ');
-            return redirect('admin/faqs');
-        }*/
+            return redirect('admin/clients');
+        }
     }
 }
