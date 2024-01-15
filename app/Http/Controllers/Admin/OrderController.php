@@ -152,9 +152,16 @@ class OrderController extends Controller
      * @param  \App\Models\Faq  $faq
      * @return \Illuminate\Http\Response
      */
-    public function show(Faq $faq)
+    public function show($id)
     {
-        //
+        $title = 'بروفايل الطلب';
+        $order = Order::find($id);
+        echo "<pre>";
+        var_dump($order->entries);exit();
+        echo "</pre>";
+        //var_dump($cars);
+        return view('admin.orders.show',compact('id','title'));
+
     }
 
     /**

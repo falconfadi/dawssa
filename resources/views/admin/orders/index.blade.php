@@ -41,7 +41,7 @@
                     <?php $i=0; foreach ($orders as $order){
                     ?>
                     <tr>
-                        <td><?=$order['id']?></td>
+                        <td>{{$order->id}}</td>
                         <td>   <?=$order->client->first_name?>                 </td>
                         <td><?=$order['created_at']?></td>
                         <td> <?=($order['is_regular']==0)?'نظامي':'مخالفات'?></td>
@@ -57,6 +57,8 @@
                                     <a type="button" class="btn-sm" href="#">حذف</a>
                                     <div class="dropdown-divider"></div>
                                     <a type="button" class="btn-sm" href="#">تأكيد</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="{{url('admin/orders/'.$order->id)}}">بروفايل</a>
 
                                 </div>
                             </div>

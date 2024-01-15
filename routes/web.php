@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('orders/delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'destroy']);
     Route::get('orders/edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit']);
     Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
+    Route::get('/orders/{id}', [\App\Http\Controllers\Admin\OrderController::class,'show']);
     Route::get('/order-details/{id}', [\App\Http\Controllers\Admin\OrderController::class,'OrderDetails']);
     Route::post('/order-details-store/', [\App\Http\Controllers\Admin\OrderController::class,'OrderDetailsStore']);
 
