@@ -99,7 +99,7 @@ class OrderController extends Controller
 
             $file = $request->file($key);
             $file_name = 'entries/' . md5(uniqid() . time()) . '.' . $file->getClientOriginalExtension();
-            if ($file->move('storage/sliders/', $file_name)) {
+            if ($file->move('storage/entries/', $file_name)) {
                 $orderEntry->value = $file_name;
             }
             $orderEntry->save();
@@ -156,11 +156,12 @@ class OrderController extends Controller
     {
         $title = 'بروفايل الطلب';
         $order = Order::find($id);
-        echo "<pre>";
-        var_dump($order->entries);exit();
-        echo "</pre>";
+        $ordersEntries = OrderEntry::where('order_id',$id)->get();
+        //echo "<pre>";
+        $entries = $order->entries;
+        //echo "</pre>";
         //var_dump($cars);
-        return view('admin.orders.show',compact('id','title'));
+        return view('admin.orders.show',compact('id','title','entries','ordersEntries'));
 
     }
 
@@ -172,7 +173,6 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-
         $title = __('label.edit_faq');
         $faq = Faq::find($id);
         //var_dump($cars);
