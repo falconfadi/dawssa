@@ -74,7 +74,10 @@ class OrderController extends Controller
     public function OrderDetails($id){
         $title = 'تفاصيل الطلب';
         $order = Order::find($id);
-        $service = Service::with('entries')->find($order->service_id);
+   //     $service = Service::with('entries')->find($order->service_id);
+        $service = Service::with(['entries' => function ($query) use ($order) {
+            $query->where('is_regular', $order->is_regular);
+        }])->find($order->service_id);
         //var_dump($service->entries);exit();
         $formContent = '';
         $entriesContr = new EntryController();
@@ -152,13 +155,14 @@ class OrderController extends Controller
      * @param  \App\Models\Faq  $faq
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $title = 'بروفايل الطلب';
         $order = Order::find($id);
         $ordersEntries = OrderEntry::where('order_id',$id)->get();
         //echo "<pre>";
-        $entries = $order->entries;
+       $entries = $order->entries;
         //echo "</pre>";
         //var_dump($cars);
         return view('admin.orders.show',compact('id','title','entries','ordersEntries'));
