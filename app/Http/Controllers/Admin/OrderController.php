@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Faq;
 use App\Models\Order;
+use App\Models\orderDossier;
 use App\Models\OrderEntry;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -50,12 +51,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-//        $client = new Client();
-//        $client->first_name = $request->input('first_name');
-//        $client->last_name = $request->input('last_name');
-//        $client->father_name = $request->input('father_name');
-//        $client->national_id = $request->input('national_id');
-//        $client->save();
 
         $order = new Order();
         $order->is_regular = $request->input('is_regular');
@@ -208,4 +203,17 @@ class OrderController extends Controller
             return redirect('admin/faqs/');
         }
     }
+
+    public function receitNumberStore(Request $request){
+
+        $orderDossier = new orderDossier();
+        $orderDossier->order_id =  $request->order_id;
+        $orderDossier->receit_number = $request->number;
+        $orderDossier->save();
+
+        Session::flash('alert-success',"تم إضافة رقم وصل الصندوق");
+        return redirect('admin/orders-profile/'.$request->order_id);
+
+    }
+
 }

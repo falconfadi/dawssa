@@ -58,7 +58,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a type="button" class="btn-sm" href="#">تأكيد</a>
                                     <div class="dropdown-divider"></div>
-                                    <a type="button" class="btn-sm" href="{{url('admin/orders/'.$order->id)}}">بروفايل</a>
+                                    <a type="button" class="btn-sm" href="{{url('admin/orders-profile/'.$order->id)}}">بروفايل</a>
 
                                 </div>
                             </div>

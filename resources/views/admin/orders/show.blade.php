@@ -9,6 +9,16 @@
     <section class="content">
         <div class="container-fluid">
 
+            @if(Session::has('alert-success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert-body">
+                        {!! session('alert-success') !!}
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <!-- Timelime example  -->
             <div class="row">
                 <div class="col-md-12">
@@ -27,13 +37,13 @@
                                 <h3 class="timeline-header">رقم وصل الصندوق</h3>
 
                                 <div class="timeline-body">
-                                    <form>
+                                    <form action="{{url('admin/order/receit_number_store')}}"  method="post">
+                                        @csrf
                                         <div class="card-body">
                                             <div class="form-group">
-
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <input type="number" class="form-control" id="exampleInputEmail1" name="number" required>
+                                                <input type="hidden" name="order_id" value="{{$id}}" >
                                             </div>
-
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">

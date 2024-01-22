@@ -104,9 +104,11 @@
     @push('ajax')
         <script type="application/javascript">
             $(document).ready(function() {
+
                 $('input[name="search"]').keyup(function() {
+
                     if($("#search").val().length>=11){
-                        //console.log($(this).length);
+                        console.log($(this).length);
                         var nationalId = $(this).val();
                         var token = $("#token").val();
                         $.ajax({
