@@ -7,7 +7,31 @@
     </style>
     <!-- Main content -->
     <section class="content">
+        <div class="card-header">
+            <h3 class="card-title"><?php echo ($title); ?></h3>
+        </div>
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">معلومات المشترك</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>الاسم:</label>
+                                <span>{{ $client->first_name ?? '' }} {{ $client->father_name ?? '' }} {{ $client->last_name ?? '' }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>الرقم الوطني:</label>
+                                <span>{{ $client->national_id ?? '' }}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
             @if(Session::has('alert-success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,7 +50,7 @@
                     <div class="timeline">
                         <!-- timeline time label -->
                         <div class="time-label">
-                            <span class="bg-red">16 Jan. 2024</span>
+                            <span class="bg-red">{{$updatedAt}}</span>
                         </div>
                         <!-- /.timeline-label -->
                         <!-- timeline item -->
@@ -37,12 +61,12 @@
                                 <h3 class="timeline-header">رقم وصل الصندوق</h3>
 
                                 <div class="timeline-body">
-                                    <form action="{{url('admin/order/receit_number_store')}}"  method="post">
+                                    <form action="{{ url('admin/order/receit_number_store') }}" method="post">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <input type="number" class="form-control" id="exampleInputEmail1" name="number" required>
-                                                <input type="hidden" name="order_id" value="{{$id}}" >
+                                                <input type="number" class="form-control" id="exampleInputEmail1" name="number" required value="{{ $receitNumber ?? '' }}">
+                                                <input type="hidden" name="order_id" value="{{ $id }}">
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -50,6 +74,7 @@
                                             <button type="submit" class="btn btn-primary">إدخال</button>
                                         </div>
                                     </form>
+
                                 </div>
 
                             </div>
@@ -62,11 +87,17 @@
                                 <h3 class="timeline-header">دراسة دائرة الوصل</h3>
 
                                 <div class="timeline-body">
-                                    <form>
+                                    <form action="{{ url('admin/order/daeert_alwasl_store') }}" method="post">
+                                    @csrf
                                         <div class="card-body">
                                             <div class="form-group">
 
-                                                <textarea type="email" class="form-control" id="exampleInputEmail1"></textarea>
+                                                <textarea type="email" class="form-control" name="daeertAlwasl" id="exampleInputEmail1" >
+
+                                                    {{$daeertAlwaslText ?? ''}}
+                                                </textarea>
+                                                <input type="hidden" name="order_id" value="{{ $id }}">
+
                                             </div>
 
                                         </div>

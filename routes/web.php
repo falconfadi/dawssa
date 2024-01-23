@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('orders/edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit']);
         Route::post('orders/update', [\App\Http\Controllers\Admin\OrderController::class,'update']);
         Route::post('order/receit_number_store', [\App\Http\Controllers\Admin\OrderController::class,'receitNumberStore']);
+        Route::post('order/daeert_alwasl_store', [\App\Http\Controllers\Admin\OrderController::class,'daeertAlwaslStore']);
 
         Route::get('orders/delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'destroy']);
         Route::get('orders-profile/{id}', [\App\Http\Controllers\Admin\OrderController::class,'show']);

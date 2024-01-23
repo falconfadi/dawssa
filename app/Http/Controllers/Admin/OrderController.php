@@ -15,6 +15,8 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use TCPDF;
 use TCPDF_FONTS;
+use Carbon\Carbon;
+
 
 
 class OrderController extends Controller
@@ -158,9 +160,22 @@ class OrderController extends Controller
         $ordersEntries = OrderEntry::where('order_id',$id)->get();
         //echo "<pre>";
        $entries = $order->entries;
+
+       $orderDossiers =orderDossier ::where('order_id',$id)->get();
+        $receitNumber= $orderDossiers->first()->receit_number;
+        $daeertAlwaslText= $orderDossiers->first()->daeert_alwasl_text;
+
+
+        $updatedAt=   Carbon::parse($orderDossiers->first()->updated_at)->toDateString();
+        $client = $order->client;
+        // echo $orderDossiers;
+     ///  echo $daeertAlwaslText;
+
+        // var_dump($orderDossiers);
+
         //echo "</pre>";
         //var_dump($cars);
-        return view('admin.orders.show',compact('id','title','entries','ordersEntries'));
+        return view('admin.orders.show',compact('id','title','entries','ordersEntries','receitNumber','daeertAlwaslText','updatedAt','client'));
 
     }
 
@@ -206,13 +221,55 @@ class OrderController extends Controller
 
     public function receitNumberStore(Request $request){
 
-        $orderDossier = new orderDossier();
-        $orderDossier->order_id =  $request->order_id;
-        $orderDossier->receit_number = $request->number;
-        $orderDossier->save();
+        // Find an existing record with the given order_id
+        $orderDossier = OrderDossier::where('order_id', $request->order_id)->first();
 
-        Session::flash('alert-success',"تم إضافة رقم وصل الصندوق");
-        return redirect('admin/orders-profile/'.$request->order_id);
+        // If the record exists, update the receit_number
+        if ($orderDossier) {
+            $orderDossier->receit_number = $request->number;
+            $orderDossier->save();
+            $message = "تم تحديث رقم وصل الصندوق";
+        } else {
+            // If the record doesn't exist, create a new one
+            $orderDossier = new OrderDossier();
+            $orderDossier->order_id = $request->order_id;
+            $orderDossier->receit_number = $request->number;
+            $orderDossier->save();
+            $message = "تم إضافة رقم وصل الصندوق";
+        }
+
+        // Use the updated message in the flash message
+        Session::flash('alert-success', $message);
+
+        return redirect('admin/orders-profile/' . $request->order_id);
+
+
+    }
+
+    public function daeertAlwaslStore(Request $request){
+
+        // Find an existing record with the given order_id
+        $orderDossier = OrderDossier::where('order_id', $request->order_id)->first();
+
+        // If the record exists, update the receit_number
+        if ($orderDossier) {
+            $orderDossier->daeert_alwasl_text = $request->daeertAlwasl;
+            $orderDossier->save();
+            $message = "تم تحديث دراسة دائرة الوصل";
+        } else {
+            // If the record doesn't exist, create a new one
+            $orderDossier = new OrderDossier();
+            $orderDossier->order_id = $request->order_id;
+            $orderDossier->daeert_alwasl_text = $request->daeertAlwasl;
+            $orderDossier->save();
+            $message = "تم إضافة دراسة دائرة وصل";
+        }
+
+        // Use the updated message in the flash message
+        Session::flash('alert-success', $message);
+
+        return redirect('admin/orders-profile/' . $request->order_id);
+
 
     }
 
