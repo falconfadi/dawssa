@@ -57,6 +57,11 @@ class OrderController extends Controller
         $order = new Order();
         $order->is_regular = $request->input('is_regular');
         $order->service_id = $request->input('service_id');
+        $order->applicant_first_name = $request->input('applicant_first_name');
+        $order->applicant_last_name = $request->input('applicant_last_name');
+        $order->applicant_father_name = $request->input('applicant_father_name');
+        $order->applicant_national_id = $request->input('applicant_national_id');
+
         $order->mobile = $request->input('phone');
         $order->client_id = $request->input('client_id');//$client->id;
         if ($order->save()) {

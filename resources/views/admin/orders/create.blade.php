@@ -25,11 +25,13 @@
                         <!-- form start -->
                         <form method="post" action="{{url('admin/orders/store')}}" enctype="multipart/form-data" onsubmit="return checkValidations()">
                             @csrf
+
+
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="first_name">الاسم</label>
+                                            <label for="first_name">اسم مالك العداد</label>
                                             <input type="text" class="form-control" id="first_name" placeholder=" " name="first_name" readonly>
                                         </div>
                                     </div>
@@ -57,6 +59,38 @@
                                     <div class="col-md-6" style="padding-top: 35px" >
                                         <div class="form-group" style="display: none" id="add_link">
                                             <a href="{{url('admin/clients/create')}}"  target="__blank">إضافة مشترك جديد</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="same_as_applicant">صاحب العداد هو نفسه مالك العداد </label><br>
+                                            <input type="checkbox" id="same_as_applicant" name="same_as_applicant" onclick="handleCheckbox(this)" checked>
+                                        </div>
+                                    </div>
+                                    <div id="applicant_info" style="display:none">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="applicant_first_name">اسم المتقدم</label>
+                                                <input type="text" class="form-control" id="applicant_first_name" placeholder=" " name="applicant_first_name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="applicant_father_name">اسم الأب</label>
+                                                <input type="text" class="form-control" id="applicant_father_name" placeholder=" " name="applicant_father_name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="applicant_last_name">الكنية</label>
+                                                <input type="text" class="form-control" id="applicant_last_name" placeholder=" " name="applicant_last_name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="applicant_national_id">الرقم الوطني</label>
+                                                <input type="text" class="form-control" id="applicant_national_id" placeholder=" " name="applicant_national_id">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -174,6 +208,14 @@
             //
             // }
             return x;
+        }
+        function handleCheckbox(checkbox) {
+            var applicantInfo = document.getElementById("applicant_info");
+            if (checkbox.checked) {
+                applicantInfo.style.display = "none";
+            } else {
+                applicantInfo.style.display = "block";
+            }
         }
     </script>
 @endpush
