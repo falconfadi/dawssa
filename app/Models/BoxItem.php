@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class BoxItem extends Model
 {
     use HasFactory;
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
+    }
 }

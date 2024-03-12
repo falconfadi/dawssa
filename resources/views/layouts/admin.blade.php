@@ -164,6 +164,36 @@
 
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                الصندوق
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{url('admin/boxes')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>الصندوق</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/box_items')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>بنود الدفع في الصندوق</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/organizations')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>المؤسسات المرتبطة</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
 
 
 {{--                    <li class="nav-item">--}}

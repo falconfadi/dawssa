@@ -80,5 +80,26 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::post('users_panel/update', [\App\Http\Controllers\Admin\UserPanelController::class, 'update_users_panel']);
         Route::get('users_panel/delete/{id}',[\App\Http\Controllers\Admin\UserPanelController::class,'destroy_users_panel']);
 
+
+        Route::get('boxes',[\App\Http\Controllers\Admin\BoxController::class,'index']);
+        Route::get('boxes/create',[\App\Http\Controllers\Admin\BoxController::class,'create']);
+        Route::post('boxes/store', [\App\Http\Controllers\Admin\BoxController::class, 'store']);
+        Route::get('boxes/edit/{id}',[\App\Http\Controllers\Admin\BoxController::class,'edit']);
+        Route::post('boxes/update', [\App\Http\Controllers\Admin\BoxController::class, 'update']);
+        Route::get('boxes/delete/{id}',[\App\Http\Controllers\Admin\BoxController::class,'destroy']);
+
+        Route::get('box_items',[\App\Http\Controllers\Admin\BoxItemController::class,'index']);
+        Route::get('box_items/create',[\App\Http\Controllers\Admin\BoxItemController::class,'create']);
+        Route::post('box_items/store', [\App\Http\Controllers\Admin\BoxItemController::class, 'store']);
+        Route::get('box_items/edit/{id}',[\App\Http\Controllers\Admin\BoxItemController::class,'edit']);
+        Route::post('box_items/update', [\App\Http\Controllers\Admin\BoxItemController::class, 'update']);
+        Route::get('box_items/delete/{id}',[\App\Http\Controllers\Admin\BoxItemController::class,'destroy']);
+
+        Route::get('organizations',[\App\Http\Controllers\Admin\OranizationController::class,'index']);
+        Route::get('organizations/create',[\App\Http\Controllers\Admin\OranizationController::class,'create']);
+        Route::post('organizations/store', [\App\Http\Controllers\Admin\OranizationController::class, 'store']);
+        Route::get('organizations/edit/{id}',[\App\Http\Controllers\Admin\OranizationController::class,'edit']);
+        Route::post('organizations/update', [\App\Http\Controllers\Admin\OranizationController::class, 'update']);
+        Route::get('organizations/delete/{id}',[\App\Http\Controllers\Admin\OranizationController::class,'destroy']);
     });
 });
