@@ -95,11 +95,11 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::post('box_items/update', [\App\Http\Controllers\Admin\BoxItemController::class, 'update']);
         Route::get('box_items/delete/{id}',[\App\Http\Controllers\Admin\BoxItemController::class,'destroy']);
 
-        Route::get('organizations',[\App\Http\Controllers\Admin\OranizationController::class,'index']);
-        Route::get('organizations/create',[\App\Http\Controllers\Admin\OranizationController::class,'create']);
-        Route::post('organizations/store', [\App\Http\Controllers\Admin\OranizationController::class, 'store']);
-        Route::get('organizations/edit/{id}',[\App\Http\Controllers\Admin\OranizationController::class,'edit']);
-        Route::post('organizations/update', [\App\Http\Controllers\Admin\OranizationController::class, 'update']);
-        Route::get('organizations/delete/{id}',[\App\Http\Controllers\Admin\OranizationController::class,'destroy']);
+        Route::get('organizations',[\App\Http\Controllers\Admin\OrganizationController::class,'index']);
+        Route::get('organizations/create',[\App\Http\Controllers\Admin\OrganizationController::class,'create']);
+        Route::post('organizations/store', [\App\Http\Controllers\Admin\OrganizationController::class, 'store']);
+        Route::get('organizations/edit/{id}',[\App\Http\Controllers\Admin\OrganizationController::class,'edit']);
+        Route::post('organizations/update', [\App\Http\Controllers\Admin\OrganizationController::class, 'update']);
+        Route::get('organizations/delete/{id}',[\App\Http\Controllers\Admin\OrganizationController::class,'destroy']);
     });
 });

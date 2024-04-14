@@ -17,9 +17,9 @@
                 <h3 class="card-title"><b><?=$title?></b></h3>
                 <div class="col-lg-4  float-left">
                     <div class="btn-group w-100">
-                        <a class="btn btn-success col fileinput-button" href="{{url('admin/boxes/create')}}">
+                        <a class="btn btn-success col fileinput-button" href="{{url('admin/box_items/create')}}">
                             <i class="fas fa-plus"></i>
-                            <span>إضافة صندوق </span>
+                            <span>إضافة بند دفع </span>
                         </a>
                     </div>
                 </div>

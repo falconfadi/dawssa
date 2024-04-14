@@ -13,18 +13,38 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/services/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/box_items/store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">الاسم</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="first_name">
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">السعر</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="price">
                                         </div>
                                     </div>
 
-                                </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>اسم المؤسسة</label>
+                                            <select class="form-control select2" style="width: 100%;" name="organization_id">
+                                                <?php foreach ($organizations as $organization){ ?>
+                                                <option value="{{$organization->id}}" > <?=$organization->name?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                </div> <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">ملاحظة</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder=" " name="note">
+                                        </div>
+                                    </div>
 
 
                             </div>

@@ -17,9 +17,9 @@
                 <h3 class="card-title"><b><?=$title?></b></h3>
                 <div class="col-lg-4  float-left">
                     <div class="btn-group w-100">
-                        <a class="btn btn-success col fileinput-button" href="{{url('admin/boxes/create')}}">
+                        <a class="btn btn-success col fileinput-button" href="{{url('admin/organizations/create')}}">
                             <i class="fas fa-plus"></i>
-                            <span>إضافة صندوق </span>
+                            <span>إضافة مؤسسة </span>
                         </a>
                     </div>
                 </div>
@@ -32,15 +32,16 @@
                     <tr>
                         <th>#</th>
                         <th>الاسم  </th>
-                        <th>تحكم</th>
+                        <th>تاريخ الإضافة  </th>
                     </tr>
                     </thead>
                     <tbody>
                     @php $i=0; @endphp
-                    @foreach ($boxes as $item)
+                    @foreach ($organizations as $item)
                     <tr>
                         <td>{{$i}}</td>
                         <td>{{$item->name}}</td>
+                        <td>{{$item->created_at}}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default"></button>
