@@ -12,7 +12,7 @@ class ServiceController extends Controller
     {
         $title ='الخدمات';
         //$local =  session()->get('locale');
-        $services = Service::all();
+        $services = Service::with('boxItems')->get();
         return view('admin.services.index',compact('title','services'));
     }
 

@@ -17,9 +17,9 @@
                 <h3 class="card-title"><b><?=$title?></b></h3>
                 <div class="col-lg-4  float-left">
                     <div class="btn-group w-100">
-                        <a class="btn btn-success col fileinput-button" href="{{url('admin/services/create')}}">
+                        <a class="btn btn-success col fileinput-button" href="{{ url('admin/service_box_items/create', ['id' => $serviceId]) }}">
                             <i class="fas fa-plus"></i>
-                            <span>إضافة خدمة </span>
+                            <span>تعديل بنود دفع هذه الخدمة </span>
                         </a>
                     </div>
                 </div>
@@ -32,33 +32,39 @@
                     <tr>
                         <th>#</th>
                         <th>الاسم  </th>
-                        <th>بنود الدفع </th>
+                        <th>المؤسسة المرتبطة  </th>
+                        <th>السعر  </th>
+                        <th>من تاريخ</th>
+                        <th>إلى تاريخ</th>
 
                         <th>تحكم</th>
-
                     </tr>
                     </thead>
                     <tbody>
                     @php $i=0; @endphp
-                    @foreach ($services as $service)
+                    @foreach ($serviceBoxItems as $item)
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$service->name}}</td>
                         <td>
-                            @foreach($service->boxItems as $boxItem)
-                                {{ $boxItem->name }} <br>
-                            @endforeach
-                        </td>                        <td>
+                            {{$item->boxItem->name}}
+                        </td>
+                        <td>{{$item->boxItem->Organization->name}}</td>
+                        <td>
+                            {{$item->boxItem->price}}
+                        </td>
+                        <td>{{$item->from_date}}</td>
+                        <td>{{$item->to_date}}</td>
+                        <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default"></button>
                                 <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu" role="menu">
-                                    <a type="button" class="btn-sm" href="{{ url('admin/service_box_items/index', ['id' => $service->id]) }}">عرض تفاصيل بنود الدفع</a>                                    <div class="dropdown-divider"></div>
-                                    <a type="button" class="btn-sm" href="{{ url('admin/service_box_items/create', ['id' => $service->id]) }}">إضافة بند دفع</a>
-                                </div>
-                            </div>
+                                    <a type="button" class="btn-sm" href="#">تعديل</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="#">حذف</a>
+
                         </td>
                     </tr>
                     @php  $i++; @endphp

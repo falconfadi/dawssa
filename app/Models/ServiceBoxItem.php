@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceBoxItem extends Model
 {
     use HasFactory;
+    public function service()
+    {
+        return $this->belongsTo(Service::class,'service_id');
+    }
+    public function boxItem()
+    {
+        return $this->belongsTo(BoxItem::class, 'box_item_id');
+    }
 }

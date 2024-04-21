@@ -101,5 +101,9 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('organizations/edit/{id}',[\App\Http\Controllers\Admin\OrganizationController::class,'edit']);
         Route::post('organizations/update', [\App\Http\Controllers\Admin\OrganizationController::class, 'update']);
         Route::get('organizations/delete/{id}',[\App\Http\Controllers\Admin\OrganizationController::class,'destroy']);
+
+        Route::get('service_box_items/index/{id}',[\App\Http\Controllers\Admin\ServiceBoxItemsController::class,'index']);
+        Route::get('service_box_items/create/{id}',[\App\Http\Controllers\Admin\ServiceBoxItemsController::class,'create']);
     });
+
 });
