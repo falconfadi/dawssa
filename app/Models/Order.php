@@ -23,6 +23,10 @@ class Order extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
+    public function waterMeter()
+    {
+        return $this->belongsTo(WaterMeter::class, 'water_meter_id');
+    }
 
 
 }

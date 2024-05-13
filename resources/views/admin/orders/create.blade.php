@@ -47,6 +47,12 @@
                                             <input type="text" class="form-control" id="last_name" placeholder=" "  name="last_name" readonly>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="applicant_last_name">رقم العداد</label>
+                                            <input type="text" class="form-control" id="water_meter_number" placeholder=" " name="water_meter_number">
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="national_id">ابحث بحسب الرقم الوطني</label>
@@ -161,6 +167,15 @@
                                         $("#father_name").val(value.father_name);
                                         $("#last_name").val(value.last_name);
                                         $("#client_id").val(value.id);
+// Get the last water meter number
+                                        var waterMeters = value.water_meters;
+                                        if (waterMeters.length > 0) {
+                                            var lastWaterMeter = waterMeters[waterMeters.length - 1];
+                                            $("#water_meter_number").val(lastWaterMeter.number);
+
+                                        } else {
+                                            $("#water_meter_number").val('');
+                                        }
                                     });
 
                                 } else {

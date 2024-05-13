@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\orderDossier;
 use App\Models\OrderEntry;
 use App\Models\Service;
+use App\Models\WaterMeter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Dompdf\Dompdf;
@@ -29,9 +30,10 @@ class OrderController extends Controller
     {
         $search = $request->get('national_id');
         $data = array();
-        if (strlen($search)>0){
-            $data = Client::where('national_id', 'LIKE',   "%{$search}%")->get();
-
+        if (strlen($search) > 0) {
+            $data = Client::with('waterMeters')
+                ->where('national_id', 'LIKE', "%{$search}%")
+                ->get();
         }
         return response()->json($data);
     }
@@ -39,7 +41,7 @@ class OrderController extends Controller
     {
         $title ='الطلبات';
         //$local =  session()->get('locale');
-        $orders = Order::all();
+        $orders = Order::with('waterMeter')->get();
         return view('admin.orders.index',compact('title','orders'));
     }
 
@@ -73,7 +75,23 @@ class OrderController extends Controller
 
         $order->mobile = $request->input('phone');
         $order->client_id = $request->input('client_id');//$client->id;
+        if ($request->has('water_meter_number')) {
+            $waterMeterNumber = $request->input('water_meter_number');
 
+            // Check if water meter with the provided number exists
+            $waterMeter = WaterMeter::where('number', $waterMeterNumber)->first();
+
+            // If water meter doesn't exist, create a new one
+            if (!$waterMeter) {
+                $waterMeter = new WaterMeter();
+                $waterMeter->number = $waterMeterNumber;  $client = Client::find($request->input('client_id'));
+                $waterMeter->client()->associate($client);
+                $waterMeter->save();
+            }
+
+            // Assign the water meter ID to the order
+            $order->water_meter_id = $waterMeter->id;
+        }
         if ($order->save()) {
             Session::flash('alert-success',__('message.new_faqs_added'));
             return redirect('admin/order-details/'.$order->id);

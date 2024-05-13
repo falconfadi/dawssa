@@ -33,6 +33,7 @@
                         <th>المشترك</th>
                         <th>المتقدم</th> <!-- Added new column for the applicant -->
                         <th>التاريخ</th>
+                        <th>رقم العداد</th>
                         <th>نظامي\مخالفات</th>
                         <th>تحكم</th>
                     </tr>
@@ -44,6 +45,7 @@
                         <td>{{$order->client->first_name}} {{$order->client->father_name}} {{$order->client->last_name}}</td> <!-- Display complete client name -->
                         <td>{{$order->applicant_first_name}} {{$order->applicant_father_name}} {{$order->applicant_last_name}}</td> <!-- Display complete applicant name -->
                         <td>{{$order['created_at']}}</td>
+                        <td>{{optional($order->waterMeter)->number}}</td>
                         <td>{{($order['is_regular']==0)?'نظامي':'مخالفات'}}</td>
                         <td>
                             <div class="btn-group">
