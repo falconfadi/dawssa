@@ -112,8 +112,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-
-
+                    @if(\Auth::user()->can('orders'))
                     <li class="nav-item">
                         <a href="{{url('admin/orders')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -122,7 +121,8 @@
                             </p>
                         </a>
                     </li>
-
+                    @endif
+                    @if(\Auth::user()->can('clients'))
                     <li class="nav-item">
                         <a href="{{url('admin/clients')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -131,6 +131,8 @@
                             </p>
                         </a>
                     </li>
+                    @endif
+                    @if(\Auth::user()->can('roles'))
                     <li class="nav-item">
                         <a href="{{url('admin/services')}}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -139,6 +141,8 @@
                             </p>
                         </a>
                     </li>
+                    @endif
+                    @if(\Auth::user()->can('roles'))
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -164,6 +168,8 @@
 
                         </ul>
                     </li>
+                    @endif
+                    @if(\Auth::user()->can('boxes'))
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -194,6 +200,7 @@
 
                         </ul>
                     </li>
+                    @endif
 
 
 {{--                    <li class="nav-item">--}}

@@ -26,6 +26,7 @@ class OrderController extends Controller
     {
         parent::__construct();
     }
+
     public function autocomplete(Request $request)
     {
         $search = $request->get('national_id');
@@ -37,6 +38,7 @@ class OrderController extends Controller
         }
         return response()->json($data);
     }
+
     public function index()
     {
         $title ='الطلبات';

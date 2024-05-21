@@ -9,6 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
+
+    const TYPE = [
+        'REGULAR' => 0,
+        'NOT_REGULAR' => 1,
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');

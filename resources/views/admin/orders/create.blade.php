@@ -110,8 +110,8 @@
                                         <div class="form-group">
                                             <label>نظامي\مخالفات</label>
                                             <select class="form-control " style="width: 100%;" name="is_regular">
-                                                <option value="0" >نظامي</option>
-                                                <option value="1" >مخالفات</option>
+                                                <option value="{{\App\Models\Order::TYPE['REGULAR']}}" >نظامي</option>
+                                                <option value="{{\App\Models\Order::TYPE['NOT_REGULAR']}}" >مخالفات</option>
                                             </select>
                                         </div>
                                     </div>
