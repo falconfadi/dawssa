@@ -66,6 +66,9 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('orders/autocomplete',[\App\Http\Controllers\Admin\OrderController::class,'autocomplete']);
 
 
+        Route::get('service_entries/{id}',[\App\Http\Controllers\Admin\ServiceEntryController::class,'index']);
+        Route::get('service_entries/create/{id}',[\App\Http\Controllers\Admin\ServiceEntryController::class,'create']);
+
         Route::get('roles',[\App\Http\Controllers\Admin\RoleController::class,'index']);
         Route::get('roles/create',[\App\Http\Controllers\Admin\RoleController::class,'create']);
         Route::post('roles/store', [\App\Http\Controllers\Admin\RoleController::class, 'store']);

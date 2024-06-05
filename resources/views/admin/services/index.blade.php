@@ -48,15 +48,19 @@
                             @foreach($service->boxItems as $boxItem)
                                 {{ $boxItem->name }} <br>
                             @endforeach
-                        </td>                        <td>
+                        </td>
+                        <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default"></button>
                                 <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu" role="menu">
-                                    <a type="button" class="btn-sm" href="{{ url('admin/service_box_items/index', ['id' => $service->id]) }}">عرض تفاصيل بنود الدفع</a>                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="{{ url('admin/service_box_items/index', ['id' => $service->id]) }}">عرض تفاصيل بنود الدفع</a>
+                                    <div class="dropdown-divider"></div>
                                     <a type="button" class="btn-sm" href="{{ url('admin/service_box_items/create', ['id' => $service->id]) }}">إضافة بند دفع</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a type="button" class="btn-sm" href="{{ url('admin/service_entries', ['id' => $service->id]) }}">المرفقات</a>
                                 </div>
                             </div>
                         </td>
