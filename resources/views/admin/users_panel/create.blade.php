@@ -1,18 +1,21 @@
 @extends('layouts/admin')
 @section('content')
+    @push('select2-css')
+        <!-- Select2 -->
         <link rel="stylesheet" href="{{ url('admin/plugins/select2/css/select2.min.css') }}">
-<style>
-    .select2-container--default .select2-selection--multiple .select2-selection__choice {
-        background-color: #007bff;
-        /* border-color: #006fe6; */
-        color: #fff;
-        padding: 0 10px;
-        margin-top: .31rem;
-    }
-    .font-white{
-        color:#fff !important;
-    }
-</style>
+        <style>
+            .select2-container--default .select2-selection--multiple .select2-selection__choice {
+                background-color: #007bff;
+                /* border-color: #006fe6; */
+                color: #fff;
+                padding: 0 10px;
+                margin-top: .31rem;
+            }
+            .font-white{
+                color:#fff !important;
+            }
+        </style>
+    @endpush
 
     <section class="content">
         <div class="container-fluid">

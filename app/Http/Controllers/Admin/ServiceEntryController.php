@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Entry;
 use App\Models\Organization;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -22,11 +23,12 @@ class ServiceEntryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($serviceId)
     {
         $title ='إضافة مرفق';
-
-        return view('admin.services.entries.create',compact('title'));
+        $service = Service::find($serviceId);
+        $entries = Entry::all();
+        return view('admin.services.entries.create',compact('title','service','entries'));
     }
 
     /**
@@ -34,18 +36,22 @@ class ServiceEntryController extends Controller
      */
     public function store(Request $request)
     {
-        $organization = new Organization();
-        $organization->name = $request->input('name');
-
-
-        if ($organization->save()) {
-            Session::flash('alert-success', 'تمت إضافة المؤسسة بنجاح');
-            return redirect('admin/organizations');
-        } else {
-
-            Session::flash('message', 'لم تتم إضافة المؤسسة ');
-            return redirect('admin/organizations');
+        //$organization->name = $request->input('name');
+        $service = Service::find($request->service_id);
+        $serviceEntry = $service->entries()->where('entry_id', $request->entry_id)->first();
+        //var_dump($r->id);exit();
+        if($serviceEntry){
+            Session::flash('alert-danger', 'المرفق موجود مسبقاً');
+            return redirect()->back();
         }
+        $service->entries()->attach($request->entry_id);
+
+
+        Session::flash('alert-success', 'تمت إضافة مرفق للخدمة');
+        return redirect('admin/service_entries/'.$request->service_id);
+//            Session::flash('message', 'لم تتم إضافة المؤسسة ');
+//            return redirect('admin/organizations');
+
     }
 
 

@@ -1,7 +1,34 @@
 @extends('layouts/admin')
+@push('select2-css')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ url('admin/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #007bff;
+            /* border-color: #006fe6; */
+            color: #fff;
+            padding: 0 10px;
+            margin-top: .31rem;
+        }
+        .font-white{
+            color:#fff !important;
+        }
+    </style>
+@endpush
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @if(Session::has('alert-danger'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert-body">
+                        {!! session('alert-danger') !!}
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="row">
 
                 <div class="col-md-12">
@@ -9,34 +36,27 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{$title}}</h3>
+                            <h3 class="card-title">{{$title}} - {{$service->name}}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{url('admin/roles/store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('admin/service_entries/store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">الاسم</label>
-                                            <input type="text" class="form-control" id="name" placeholder=" " name="name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name_ar">الاسم (عربي)</label>
-                                            <input type="text" class="form-control" id="name_ar" placeholder=" " name="name_ar">
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">الصلاحيات</label>
+                                            <label>نوع الخدمة</label>
+                                            <select class="form-control select2" style="width: 100%;" name="entry_id">
+                                                @foreach($entries as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                     </div>
-
-
+                                    <input type="hidden" name="service_id" value="{{$service->id}}">
 
 
                                 </div>
@@ -54,3 +74,19 @@
         </div>
     </section>
 @endsection
+@push('select2')
+    <!-- Page specific script -->
+    <script src="{{ asset('admin/plugins/select2/js/select2.min.js')}}"></script>
+
+    <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+        })
+@endpush
