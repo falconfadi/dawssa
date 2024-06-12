@@ -49,9 +49,16 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu">
-                                        <a type="button" class="btn-sm" href="{{url('admin/services-entries/edit/'.$item->id)}}">تعديل</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a type="button" class="btn-sm" href="#">حذف</a>
+
+{{--                                        <a type="button" class="btn-sm" href="#">حذف</a>--}}
+
+                                        <form action="{{ url('admin/service_entries/delete', ['id' => $item->id]) }}" method="DELETE">
+                                        <a href="#"
+                                           class="mx-3 btn btn-sm  align-items-center bs-pass-para"
+                                           data-bs-toggle="tooltip" title=""
+                                           data-bs-original-title="Delete" aria-label="Delete"><i
+                                                class="ti ti-trash text-white "></i>حذف</a>
+                                        </form>
                                     </div>
                                 </div>
                             </td>
@@ -74,3 +81,40 @@
         <!-- /.card -->
     </div>
 @endsection
+@push('sweetalert')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+
+            /*sweet alert*/
+            $(function() {
+                $(document).on("click",".bs-pass-para",function(){
+                    var form = $(this).closest("form");
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                        title:  "{{__('Are You Sure?')}}",
+                        text: "", /*{{__('This action can not be undone. Do you want to continue?')}}*/
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '{{__('Yes')}}',
+                        cancelButtonText: '{{__('No')}}',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    })
+                });
+
+            });
+        });
+    </script>
+
+@endpush

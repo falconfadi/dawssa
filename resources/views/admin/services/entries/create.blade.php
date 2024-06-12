@@ -64,6 +64,8 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
+
+                                <a type="submit" class="btn  btn-warning " href="{{url('admin/service_entries/'.$service->id)}}">إلغاء</a>
                                 <button type="submit" class="btn btn-primary">إدخال</button>
                             </div>
                         </form>

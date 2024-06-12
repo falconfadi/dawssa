@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Entry;
 use App\Models\Organization;
 use App\Models\Service;
+use App\Models\ServiceEntry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 class ServiceEntryController extends Controller
@@ -14,7 +16,7 @@ class ServiceEntryController extends Controller
     public function index($id)
     {
         $title ='مرفقات الخدمة';
-        //$local =  session()->get('locale');
+        App::setLocale('ar');
         $service = Service::find($id);
         $servicesEntries = $service->entries;
         return view('admin.services.entries.index',compact('title','servicesEntries','service'));
@@ -86,8 +88,11 @@ class ServiceEntryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Oranization $oranization)
+    public function destroy($serviceEntryId)
     {
-        //
+        $res = ServiceEntry::find($serviceEntryId)->delete();
+
+        return back()->with('success','Faq deleted successfully');
+
     }
 }

@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('service_entries/{id}',[\App\Http\Controllers\Admin\ServiceEntryController::class,'index']);
         Route::get('service_entries/create/{id}',[\App\Http\Controllers\Admin\ServiceEntryController::class,'create']);
         Route::post('service_entries/store',[\App\Http\Controllers\Admin\ServiceEntryController::class,'store']);
+        Route::get('service_entries/delete/{id}',[\App\Http\Controllers\Admin\ServiceEntryController::class,'destroy']);
 
         Route::get('roles',[\App\Http\Controllers\Admin\RoleController::class,'index']);
         Route::get('roles/create',[\App\Http\Controllers\Admin\RoleController::class,'create']);
