@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,8 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class ClientController extends Controller
 {
@@ -46,9 +49,8 @@ class ClientController extends Controller
             'last_name.required' => 'الكنية مطلوبة ',
             'father_name.required' => 'اسم الأب مطلوب ',
             'national_id.required' => 'الرقم الوطني مطلوب',
-
-
         ];
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
@@ -62,9 +64,6 @@ class ClientController extends Controller
         ],$messages);
         if ($validator->fails())
         {
-
-           // var_dump($validator->fails());
-           // var_dump($messages);
            return redirect('admin/clients/create')->withErrors($validator);
         }
         $client = new Client();
@@ -82,5 +81,32 @@ class ClientController extends Controller
             Session::flash('message','لم تتم إضافة المشترك ');
             return redirect('admin/clients');
         }
+    }
+
+    public function edit($id)
+    {
+        $title ='تعديل مشترك';
+        $client = Client::find($id);
+        return view('admin.clients.edit',compact('title','client'));
+    }
+
+    public function update(Request $request){
+        $client = Client::find($request->client_id);
+        if($client){
+            $client ->update(array(
+
+                'first_name' => $request->first_name,
+                'last_name'  => $request->last_name,
+                'father_name' => $request->father_name,
+                'phone'       => $request->phone ?? '',
+                'national_id' => $request->national_id,
+                'gender' => 1
+            ));
+            Session::flash('alert-success','تم تعديل مشترك جديد');
+            return redirect('admin/clients');
+
+        }
+
+
     }
 }

@@ -81,12 +81,12 @@
         <!-- /.card -->
     </div>
 @endsection
+@include('scripts.sweetalert');
 @push('sweetalert')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
-
             /*sweet alert*/
             $(function() {
                 $(document).on("click",".bs-pass-para",function(){

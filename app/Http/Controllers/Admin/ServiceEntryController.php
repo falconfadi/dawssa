@@ -90,9 +90,10 @@ class ServiceEntryController extends Controller
      */
     public function destroy($serviceEntryId)
     {
+        //var_dump($serviceEntryId);exit();
         $res = ServiceEntry::find($serviceEntryId)->delete();
 
-        return back()->with('success','Faq deleted successfully');
+        return back()->with('alert-success','Faq deleted successfully');
 
     }
 }

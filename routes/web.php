@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('clients', [\App\Http\Controllers\Admin\ClientController::class,'index']);
         Route::get('clients/create', [\App\Http\Controllers\Admin\ClientController::class,'create']);
         Route::post('clients/store', [\App\Http\Controllers\Admin\ClientController::class,'store']);
+        Route::get('clients/edit/{id}', [\App\Http\Controllers\Admin\ClientController::class,'edit']);
+        Route::post('clients/update', [\App\Http\Controllers\Admin\ClientController::class,'update']);
 
 
         Route::get('services', [\App\Http\Controllers\Admin\ServiceController::class,'index']);

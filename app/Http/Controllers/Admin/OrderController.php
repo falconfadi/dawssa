@@ -79,14 +79,15 @@ class OrderController extends Controller
         $order->client_id = $request->input('client_id');//$client->id;
         if ($request->has('water_meter_number')) {
             $waterMeterNumber = $request->input('water_meter_number');
-
+            //var_dump($waterMeterNumber);exit();
             // Check if water meter with the provided number exists
             $waterMeter = WaterMeter::where('number', $waterMeterNumber)->first();
 
             // If water meter doesn't exist, create a new one
             if (!$waterMeter) {
                 $waterMeter = new WaterMeter();
-                $waterMeter->number = $waterMeterNumber;  $client = Client::find($request->input('client_id'));
+                $waterMeter->number = $waterMeterNumber;
+                $client = Client::find($request->input('client_id'));
                 $waterMeter->client()->associate($client);
                 $waterMeter->save();
             }
@@ -197,19 +198,14 @@ class OrderController extends Controller
        $entries = $order->entries;
 
        $orderDossiers =orderDossier ::where('order_id',$id)->get();
-        $receitNumber= $orderDossiers->first()->receit_number;
-        $daeertAlwaslText= $orderDossiers->first()->daeert_alwasl_text;
+        $receitNumber = ($orderDossiers->first())?$orderDossiers->first()->receit_number:'';
+        $daeertAlwaslText = ($orderDossiers->first())?$orderDossiers->first()->daeert_alwasl_text:'';
 
 
-        $updatedAt=   Carbon::parse($orderDossiers->first()->updated_at)->toDateString();
+        $updatedAt =   Carbon::now();//Carbon::parse($orderDossiers->first()->updated_at)->toDateString();
         $client = $order->client;
         // echo $orderDossiers;
-     ///  echo $daeertAlwaslText;
 
-        // var_dump($orderDossiers);
-
-        //echo "</pre>";
-        //var_dump($cars);
         return view('admin.orders.show',compact('id','title','entries','ordersEntries','receitNumber','daeertAlwaslText','updatedAt','client'));
 
     }
