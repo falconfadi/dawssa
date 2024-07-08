@@ -27,17 +27,102 @@
 
 <body >
 <div class="header">
-    <p>الجمهورية العربية السورية</p>
-    <p>مؤسسة مياه دمشق </p>
-    <p>رقم الإيصال: '{receiptNumber}'</p>
+
+
+    <table width="100%" style="border-collapse: collapse;">
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">المحلة</td>
+            <td style="width: 50%; text-align: center; font-size: large "> أيصال</td>
+            <td style="width: 25%; text-align: center; ">الجمهورية العربية السورية</td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">المقاولة</td>
+            <td style="width: 50%; text-align: center; "> </td>
+            <td style="width: 25%; text-align: center; ">وزارة الموارد المائية</td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">الاكتاب</td>
+            <td style="width: 50%; text-align: center; "> </td>
+            <td style="width: 25%; text-align: center; ">المؤسسة العامة لمياه الشرب </td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">المحضر</td>
+            <td style="width: 50%; text-align: center;font-size: x-large "> {receiptNumber}</td>
+            <td style="width: 25%; text-align: center; ">  والصرف الصحي</td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">البناء</td>
+            <td style="width: 50%; text-align: center; "> </td>
+            <td style="width: 25%; text-align: center; ">في محافظة دمشق</td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">العداد</td>
+            <td style="width: 50%; text-align: center; "> </td>
+            <td style="width: 25%; text-align: center; ">  </td>
+        </tr>
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; ">القائمة</td>
+            <td style="width: 50%; text-align: center; "> من</td>
+            <td style="width: 25%; text-align: center; ">إلى أمين الصندوق</td>
+        </tr>
+
+        <tr>
+            <td style="width: 12.5%; text-align: center; "> </td>
+            <td style="width:  12.5%; text-align: center; "></td>
+            <td style="width: 50%; text-align: center; "> ذمة</td>
+            <td style="width: 25%; text-align: center; ">اقبضو المبالغ التالية</td>
+        </tr>
+    </table>
     <div class="divider"></div>
 </div>
+<table width="100%" style="border-collapse: collapse;">
+    <tr>
+        <td style="width: 15%; text-align: center; border: 1px solid #000000;"><b>رقم الحساب الفرعي</b></td>
 
-<div class="customer-info">
-    <p>اسم العميل:  '{customerName}'</p>
-    <p>رقم الهاتف: '{phoneNumber}'</p>
-    <p>نوع العقار:{propertyType}</p>
+        <td style="width: 15%; text-align: center; border: 1px solid #000000;"><b>رقم الحساب الإجمالي</b></td>
+        <td style="width: 15%; text-align: center; border: 1px solid #000000;"><b>أسماء الحسابات الدائنة</b></td>
 
+        <td style="width: 30%; text-align: center; border: 1px solid #000000;"><b>البيان</b></td>
+
+        <td style="width: 15%; text-align: center; border: 1px solid #000000;"><b>المبلغ</b></td>
+
+        <td style="width: 10%; text-align: center; border: 1px solid #000000;"><b>الرقم</b></td>
+    </tr>
+    <!-- {expenses} will be replaced dynamically -->
+    <tr></tr>
+
+</table>
+<div style="margin-top: 20px;">
+    <p style="text-align: right;"><b>التاريخ: {date}</b></p>
+    <p style="text-align: right;"><b>الاجمالي: {totalAmount}</b></p>
+    <br>
+    <table width="100%">
+        <tr>
+            <td style="width: 33%; text-align: center;">المنظم</td>
+            <td style="width: 33%; text-align: center;">المدقق</td>
+            <td style="width: 33%; text-align: center;">المدير</td>
+        </tr>
+    </table>
+</div>
+<div style="margin-top: 20px;">
+    <p style="text-align: right;">
+الصندوق
+    <p style="text-align: right;">
+         قبضت المبلغ المذكور أعلاه وقدره ________ قروش _______ ليرة سورية فقط
+    </p>
+    <p style="text-align: right;">
+        وسجل القبض في الكشف اليومي تحت رقم _________ بتاريخ ____________
+    </p>
+    <p style="text-align: right;">
+        أمين الصندوق: ________________
+    </p>
 </div>
 
 </body>
