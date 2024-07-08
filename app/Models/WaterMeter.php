@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class WaterMeter extends Model
 {
+    protected $fillable = [
+        'name',
+        'number',
+        'user_id'
+
+    ];
     public function client()
     {
         return $this->belongsTo(Client::class, 'user_id');

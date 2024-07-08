@@ -53,33 +53,7 @@
                             <span class="bg-red">{{$updatedAt}}</span>
                         </div>
                         <!-- /.timeline-label -->
-                        <!-- timeline item -->
-                        <div>
-                            <i class="fas fa-envelope bg-blue"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                                <h3 class="timeline-header">رقم وصل الصندوق</h3>
 
-                                <div class="timeline-body">
-                                    <form action="{{ url('admin/order/receit_number_store') }}" method="post">
-                                        @csrf
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="exampleInputEmail1" name="number" required value="{{ $receitNumber ?? '' }}">
-                                                <input type="hidden" name="order_id" value="{{ $id }}">
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">إدخال</button>
-                                        </div>
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END timeline item -->
                         <div>
                             <i class="fas fa-envelope bg-blue"></i>
                             <div class="timeline-item">
