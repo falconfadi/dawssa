@@ -166,7 +166,14 @@ class OrderController extends Controller
             'receiptNumber' => '123456',
             'customerName' => 'محمد محمد',
             'phoneNumber' => '123-456-7890',
-            'propertyType' => 'نظامي',
+            'propertyType' => 'نظامي', 'date' => date('d F Y'), // Current date in Arabic format (e.g., 30 يونيو 2024)
+            'totalAmount' => '600', // Replace with actual total amount
+        ];
+        // Dummy expenses array
+        $expenses = [
+            ['accountNumber' => '001', 'totalAccountNumber' => '001', 'accountNames' => 'Expense 1', 'description' => 'Description 1', 'amount' => '100', 'number' => '1'],
+            ['accountNumber' => '002', 'totalAccountNumber' => '002', 'accountNames' => 'Expense 2', 'description' => 'Description 2', 'amount' => '200', 'number' => '2'],
+            ['accountNumber' => '003', 'totalAccountNumber' => '003', 'accountNames' => 'Expense 3', 'description' => 'Description 3', 'amount' => '300', 'number' => '3'],
         ];
         $pdf->SetFont('aealarabiya', '', 12, '', true);
 
@@ -177,6 +184,20 @@ class OrderController extends Controller
         $html = str_replace('{customerName}', $data['customerName'], $html);
         $html = str_replace('{phoneNumber}', $data['phoneNumber'], $html);
         $html = str_replace('{propertyType}', $data['propertyType'], $html);
+        $html = str_replace('{date}', $data['date'], $html);
+        $html = str_replace('{totalAmount}', $data['totalAmount'], $html);
+        $expenseHtml = '';
+        foreach ($expenses as $expense) {
+            $expenseHtml .= '<tr>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['accountNumber'] . '</td>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['totalAccountNumber'] . '</td>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['accountNames'] . '</td>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['description'] . '</td>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['amount'] . '</td>';
+            $expenseHtml .= '<td style="text-align: center; border: 1px solid #000000;">' . $expense['number'] . '</td>';
+            $expenseHtml .= '</tr>';
+        }
+        $html = str_replace('<tr></tr>', $expenseHtml, $html);
 
         $pdf->writeHTML($html, true, false, true, false, '',);
 
