@@ -111,6 +111,9 @@ Route::group(['middleware' => ['auth:admin']], function() {
 
         Route::get('service_box_items/index/{id}',[\App\Http\Controllers\Admin\ServiceBoxItemsController::class,'index']);
         Route::get('service_box_items/create/{id}',[\App\Http\Controllers\Admin\ServiceBoxItemsController::class,'create']);
+
+        Route::post('receits/store', [\App\Http\Controllers\Admin\ReceitController::class,'store']);
+
     });
 
 });

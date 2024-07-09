@@ -33,6 +33,9 @@ class Order extends Model
     {
         return $this->belongsTo(WaterMeter::class, 'water_meter_id');
     }
-
+    public function receits()
+    {
+        return $this->hasMany(Receit::class,'order_id');
+    }
 
 }

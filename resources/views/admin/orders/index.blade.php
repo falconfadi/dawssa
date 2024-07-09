@@ -60,6 +60,11 @@
                                     <div class="dropdown-divider"></div>
                                     <a type="button" class="btn-sm" href="#">تأكيد</a>
                                     <div class="dropdown-divider"></div>
+                                    <form action="{{ url('admin/receits/store') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                        <button type="submit" class="btn-sm">توليد الإيصال وطباعته</button>
+                                    </form>
                                     <a type="button" class="btn-sm" href="{{url('admin/orders-profile/'.$order->id)}}">بروفايل</a>
                                 </div>
                             </div>

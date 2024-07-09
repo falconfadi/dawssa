@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Box extends Model
 {
     use HasFactory;
+
+    public function receits()
+    {
+        return $this->hasMany(Receit::class,'box_id');
+    }
+
 }
