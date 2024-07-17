@@ -167,7 +167,7 @@
                                         $("#father_name").val(value.father_name);
                                         $("#last_name").val(value.last_name);
                                         $("#client_id").val(value.id);
-// Get the last water meter number
+                                    // Get the last water meter number
                                         var waterMeters = value.water_meters;
                                         if (waterMeters.length > 0) {
                                             var lastWaterMeter = waterMeters[waterMeters.length - 1];

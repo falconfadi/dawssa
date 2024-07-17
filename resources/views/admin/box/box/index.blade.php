@@ -51,6 +51,8 @@
                                     <a type="button" class="btn-sm" href="#">تعديل</a>
                                     <div class="dropdown-divider"></div>
                                     <a type="button" class="btn-sm" href="#">حذف</a>
+                                </div>
+                            </div>
 
                         </td>
                     </tr>
